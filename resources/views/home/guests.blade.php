@@ -4,7 +4,6 @@
         <meta charset="utf-8" />
         <title>Prijava - NetSchool</title>
         <link rel="stylesheet" type="text/css" href="/css/login-style.css" />
-        <link rel="stylesheet" type="text/css" href="/css/glyphicons.css" />
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <script>
             $.ajaxSetup({
