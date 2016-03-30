@@ -1,0 +1,49 @@
+@import "compass/css3"
+@import "compass/reset"
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,700italic,400italic&subset=latin,latin-ext")
+
+@import "mixins"
+@import "variables"
+
+
+*, *::before, *::after
+  +box-sizing()
+
+body
+  background-color: lighten($primary-color, 20%)
+  margin: 0
+  padding: 0
+  font-family: Arial, Helvetica, sans-serif
+  color: #eee
+
+#sidebar
+  background-color: $primary-color
+  width: $sidebar-width
+  font-family: Lato, sans-serif
+  font-weight: 300
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+
+#user
+  padding: 0.5em
+  position: relative
+
+  > div
+    display: inline-block
+    vertical-align: middle
+
+#user__avatar
+  width: 45px
+  height: 45px
+  border-radius: 50%
+
+  > img
+    width: 100%
+    display: block
+
+#user__name
+  width: calc(100% - 45px)
+  padding-left: 0.5em
