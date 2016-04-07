@@ -2,6 +2,7 @@
 @import "compass/reset"
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,700italic,400italic&subset=latin,latin-ext")
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic&subset=latin,latin-ext")
 @import "glyphicons.css"
 
 @import "mixins"
@@ -9,7 +10,7 @@
 
 
 *, *::before, *::after
-  +box-sizing()
+  +box-sizing
 
 body
   background-color: lighten($primary-color, 20%)
@@ -22,7 +23,7 @@ body
   background-color: $primary-color
   width: $sidebar-width
   box-shadow: 2px 0 10px rgba(#000, 0.3)
-  font-family: Lato, sans-serif
+  font-family: Roboto, sans-serif
   font-weight: 300
   position: fixed
   top: 0
@@ -52,17 +53,26 @@ body
   padding-left: 0.5em
 
 #navigation
-  text-align: center
+  text-align: left
 
   > li
     padding: 1em
     cursor: pointer
     text-transform: uppercase
-    font-size: 0.8em
+    
+  a
+    text-decoration: none
+    color: inherit
 
 .navigation--active
   background-color: rgba(#fff, 0.05)
 
 .navigation__icon
-  font-size: 2.5em
-  margin-bottom: 0.2em
+  display: inline
+  font-size: 1.8em
+  margin-right: 0.4em
+  vertical-align: middle
+
+#content
+  margin-left: $sidebar-width
+  cursor: pointer

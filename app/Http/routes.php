@@ -26,4 +26,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
     Route::post('/login', ['middleware' => ['guest', 'ajax'], 'uses' => 'HomeController@signin']);
     Route::post('/register', ['middleware' => ['guest', 'ajax'], 'uses' => 'HomeController@register']);
+
+    Route::get('/files', ['middleware' => 'auth', 'uses' => 'FileController@index']);
 });

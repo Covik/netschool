@@ -11,12 +11,37 @@
         <aside id="sidebar">
             <div id="user">
                 <div id="user__avatar"><img src="http://www.adtechnology.co.uk/images/UGM-default-user.png" alt="" /></div><!--
-                --><div id="user__name">{{ $user->name }}</div>
+                --><div id="user__name">{{ $au->name }}</div>
             </div>
             <ul id="navigation">
-                @yield('menu')
+                @if($au->isAdmin())
+                    <li class="navigation--active">
+                        <div class="navigation__icon">
+                            <i class="glyphicon glyphicon-home"></i>
+                        </div>
+                        <a href="/">Početna</a>
+                    </li>
+                    <li>
+                        <div class="navigation__icon">
+                            <i class="glyphicon glyphicon-file"></i>
+                        </div>
+                        <a href="/files">Datoteke</a>
+                    </li>
+                    <li>
+                        <div class="navigation__icon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </div>
+                        <a href="/professors">Profesori</a>
+                    </li>
+                    <li>
+                        <div class="navigation__icon">
+                            <i class="glyphicon glyphicon-education"></i>
+                        </div>
+                        <a href="/students">Studenti</a>
+                    </li>
+                @endif
             </ul>
         </aside>
-        @yield('content')
+        <main id="content">@yield('content')</main>
     </body>
 </html>
