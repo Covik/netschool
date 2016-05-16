@@ -50,7 +50,7 @@
                             <div class="input-name">E-mail:</div>
                             <input type="email" name="email" autocomplete="off" />
                         </label>
-                        <label style="position: relative;">
+                        <label style="position: relative; display: block">
                             <div id="registration__passsword__hider"><i class="glyphicon glyphicon-eye-open"></i></div>
                             <div class="input-name">Lozinka:</div>
                             <input type="password" name="password" id="registration__password" />

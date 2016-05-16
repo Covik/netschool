@@ -25,6 +25,7 @@ $(document).ready(function() {
 
     $('.lr__form').submit(function (e) {
         e.preventDefault();
+        $error.hide();
 
         var data = $(this).serialize();
 

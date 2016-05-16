@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClasses extends Migration
+class CreateClassesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class CreateClasses extends Migration
     {
         Schema::create('classes', function(Blueprint $table) {
             $table->increments('id');
-            $table->tinyInteger('class');
-            $table->string('name', 10);
+            $table->tinyInteger('year');
+            $table->string('label', 3);
         });
     }
 
@@ -26,6 +26,6 @@ class CreateClasses extends Migration
      */
     public function down()
     {
-        Schema::drop('classes');
+        //
     }
 }

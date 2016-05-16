@@ -5,6 +5,15 @@
         <title>{{ $title }} - NetSchool</title>
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': '<?php echo csrf_token(); ?>'
+                },
+                dataType: 'json'
+            });
+        </script>
+        <script src="/scripts/master.js"></script>
         @yield('head')
     </head>
     <body>
@@ -31,17 +40,26 @@
                         <div class="navigation__icon">
                             <i class="glyphicon glyphicon-user"></i>
                         </div>
-                        <a href="/professors">Profesori</a>
+                        <a href="/professors">Nastavnici</a>
                     </li>
                     <li>
                         <div class="navigation__icon">
                             <i class="glyphicon glyphicon-education"></i>
                         </div>
-                        <a href="/students">Studenti</a>
+                        <a href="/students">Učenici</a>
+                    </li>
+                    <li>
+                        <div class="navigation__icon">
+                            <i class="glyphicon glyphicon-send"></i>
+                        </div>
+                        <a href="/courses">Smjerovi</a>
                     </li>
                 @endif
             </ul>
         </aside>
-        <main id="content">@yield('content')</main>
+        <main id="content">
+            <div id="error-log"></div>
+            @yield('content')
+        </main>
     </body>
 </html>

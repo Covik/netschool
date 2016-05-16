@@ -2,10 +2,10 @@
 @import "compass/reset"
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,700italic,400italic&subset=latin,latin-ext")
+@import "glyphicons.css"
 
 @import "mixins"
 @import "variables"
-
 
 *, *::before, *::after
   +box-sizing()
@@ -94,13 +94,14 @@ body
   > input
     border-radius: 3px
     cursor: pointer
-    background-color: $secondary-color
+    background-color: darken($primary-color, 10%)
     padding: 0.6em 1.2em
     text-transform: uppercase
     transition: all 0.5s
+    +md-shadow(1)
 
     &:hover
-      background-color: darken($secondary-color, 5%)
+      background-color: darken($primary-color, 7%)
 
 .input--auto
   width: auto !important
@@ -108,7 +109,7 @@ body
 #registration__passsword__hider
   position: absolute
   right: 0.6em
-  bottom: -0.25em
+  bottom: 0.5em
   cursor: pointer
   opacity: 0.7
   transition: all 0.5s
