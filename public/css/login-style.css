@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,700italic,400italic&subset=latin,latin-ext");
+@import url(glyphicons.css);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+*, *::before, *::after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #00b2ed;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #eee;
+}
+
+#error-log {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(189, 60, 60, 0.66);
+  padding: 0.7em 1em;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+#error-log.success {
+  background-color: rgba(60, 189, 82, 0.66);
+}
+
+#login-box {
+  width: 400px;
+  margin: 4em auto 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+#login-box > ul > li {
+  display: inline-block;
+  width: 50%;
+}
+
+#login__tabs__content {
+  overflow: hidden;
+}
+
+.login__tab {
+  border: 0;
+  outline: none;
+  background-color: #0093c4;
+  padding: 1em;
+  color: white;
+  font-size: 1.2em;
+  font-family: Lato, sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.login__tab:hover:not(.login__tab--active) {
+  background-color: #008cba;
+}
+
+.login__tab--active {
+  background-color: #0084b0;
+}
+
+.login__tab__content {
+  background-color: #009fd4;
+  padding: 0.5em;
+}
+.login__tab__content:last-child {
+  display: none;
+}
+.login__tab__content .input-name {
+  margin-top: 0.6em;
+  display: inline-block;
+  font-family: Lato, sans-serif;
+  font-weight: 300;
+}
+.login__tab__content input, .login__tab__content textarea {
+  border: 0;
+  outline: none;
+  font-size: 1em;
+  padding: 0.5em 0.7em;
+  font-family: Lato, sans-serif;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #EEEEEE;
+  width: 100%;
+  margin-top: 0.7em;
+  vertical-align: sub;
+}
+
+.form__submit {
+  text-align: center;
+}
+.form__submit > input {
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #008cba;
+  padding: 0.6em 1.2em;
+  text-transform: uppercase;
+  transition: all 0.5s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.form__submit > input:hover {
+  background-color: #0097c9;
+}
+
+.input--auto {
+  width: auto !important;
+}
+
+#registration__passsword__hider {
+  position: absolute;
+  right: 0.6em;
+  bottom: 0.5em;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.5s;
+}
+#registration__passsword__hider:hover {
+  opacity: 1;
+}

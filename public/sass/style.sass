@@ -1,0 +1,221 @@
+@import "compass/css3"
+@import "compass/reset"
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,700italic,400italic&subset=latin,latin-ext")
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic&subset=latin,latin-ext")
+@import "glyphicons.css"
+
+@import "mixins"
+@import "variables"
+
+
+*, *::before, *::after
+  +box-sizing
+
+body
+  background-color: $primary-color
+  margin: 0
+  padding: 0
+  font-family: Arial, Helvetica, sans-serif
+  color: #eee
+
+body, html
+  height: 100%
+
+input, button, textarea, select, option
+  background-color: rgba(#000, 0.2)
+  padding: 0.4em 0.6em
+  outline: none
+  border: 0
+  font-size: 1em
+  color: white
+  +roboto300
+
+  transition: all 0.5s
+
+select, option
+  padding: 0.2em
+
+button
+  background-color: rgba(#fff, 0.2)
+  cursor: pointer
+
+#sidebar
+  background-color: darken($primary-color, 8%)
+  width: $sidebar-width
+  box-shadow: 2px 0 10px rgba(#000, 0.3)
+  font-family: Roboto, sans-serif
+  font-weight: 300
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+
+#user
+  background-color: rgba(#000, 0.2)
+  padding: 0.5em
+  position: relative
+
+  > div
+    display: inline-block
+    vertical-align: middle
+
+#user__avatar
+  width: 45px
+  height: 45px
+  border-radius: 50%
+
+  > img
+    width: 100%
+    display: block
+
+#user__name
+  width: calc(100% - 45px)
+  padding-left: 0.5em
+
+#navigation
+  text-align: left
+
+  > li
+    cursor: pointer
+    text-transform: uppercase
+    transition: all 0.5s
+
+    &:not(.navigation--active):hover
+      background-color: rgba(#000, 0.1)
+    
+  a
+    display: block
+    padding: 1em
+    text-decoration: none
+    color: inherit
+    text-shadow: 0 2px 6px rgba(#000, 0.3)
+
+.navigation--active
+  background-color: rgba(#000, 0.1)
+
+.navigation__icon
+  display: inline
+  font-size: 1.8em
+  margin-right: 0.4em
+  vertical-align: middle
+
+#error-log
+  display: none
+  position: fixed
+  top: 0
+  left: 50%
+  transform: translateX(-50%)
+  background-color: rgba(189, 60, 60, 0.66)
+  padding: 0.7em 1em
+  border-radius: 0 0 3px 3px
+  +md-shadow(2)
+
+  &.success
+    background-color: rgba(60, 189, 82, 0.66)
+
+#content
+  margin-left: $sidebar-width
+  height: 100%
+  position: relative
+
+// Append form
+.default__append__component
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  overflow: hidden
+
+  background-color: rgba(#000, 0.08)
+  width: $append-component-width
+
+  & + div
+    margin-left: $append-component-width
+
+  > h2
+    background-color: rgba(#000, 0.1)
+    font-size: 1.4em
+    display: block
+    padding: 0.6em
+    margin-bottom: 0.4em
+    +roboto300
+    +md-shadow(2)
+
+.append-form
+  +roboto300
+  padding: 0.7em
+
+  > div:not(:last-child)
+    margin-bottom: 1em
+
+  input, textarea, select
+    margin-top: 0.5em
+    width: 100%
+
+.data-display
+  padding: 0.5em
+
+.table
+  border-collapse: collapse
+  color: #ddd
+  width: 100%
+
+  th
+    background-color: rgba(#000, 0.2)
+    font-size: 1.2em
+    padding: 0.6em !important
+    text-shadow: 0 2px 5px rgba(#000, 0.35)
+    +roboto300
+
+  th, td
+    border-bottom: 1px solid $primary-color
+    padding: 1em
+
+    &:not(:first-child)
+      text-align: center
+
+  tr:nth-child(odd)
+    background-color: rgba(#000, 0.04)
+
+
+.no-data
+  font-size: 1.2em
+  padding: 0.5em
+  text-align: center
+
+.crud-button
+  background-color: transparent
+  box-shadow: none
+  border: 0
+  border-radius: 0
+  opacity: 0.6
+  transition: all 0.5s
+
+  &:hover
+    opacity: 1
+
+.crud-delete-box
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+  background-color: rgba(#F00, 0.7)
+  padding: 0.3em
+  display: none
+
+  > button
+    background-color: rgba(#000, 0.2)
+
+[data-crud-actions]
+  position: relative
+  overflow: hidden
+
+@media only screen and (min-width: 1600px)
+  #sidebar
+    width: 15vw
+
+  #content
+    margin-left: 15vw

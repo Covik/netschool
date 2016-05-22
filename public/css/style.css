@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,700italic,400italic&subset=latin,latin-ext");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic&subset=latin,latin-ext");
+@import url(glyphicons.css);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+*, *::before, *::after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #00b2ed;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #eee;
+}
+
+body, html {
+  height: 100%;
+}
+
+input, button, textarea, select, option {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.4em 0.6em;
+  outline: none;
+  border: 0;
+  font-size: 1em;
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  transition: all 0.5s;
+}
+
+select, option {
+  padding: 0.2em;
+}
+
+button {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+#sidebar {
+  background-color: #0093c4;
+  width: 12em;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#user {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.5em;
+  position: relative;
+}
+#user > div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#user__avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+#user__avatar > img {
+  width: 100%;
+  display: block;
+}
+
+#user__name {
+  width: calc(100% - 45px);
+  padding-left: 0.5em;
+}
+
+#navigation {
+  text-align: left;
+}
+#navigation > li {
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.5s;
+}
+#navigation > li:not(.navigation--active):hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#navigation a {
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+  color: inherit;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.navigation--active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navigation__icon {
+  display: inline;
+  font-size: 1.8em;
+  margin-right: 0.4em;
+  vertical-align: middle;
+}
+
+#error-log {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(189, 60, 60, 0.66);
+  padding: 0.7em 1em;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+#error-log.success {
+  background-color: rgba(60, 189, 82, 0.66);
+}
+
+#content {
+  margin-left: 12em;
+  height: 100%;
+  position: relative;
+}
+
+.default__append__component {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.08);
+  width: 20vw;
+}
+.default__append__component + div {
+  margin-left: 20vw;
+}
+.default__append__component > h2 {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 1.4em;
+  display: block;
+  padding: 0.6em;
+  margin-bottom: 0.4em;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.append-form {
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  padding: 0.7em;
+}
+.append-form > div:not(:last-child) {
+  margin-bottom: 1em;
+}
+.append-form input, .append-form textarea, .append-form select {
+  margin-top: 0.5em;
+  width: 100%;
+}
+
+.data-display {
+  padding: 0.5em;
+}
+
+.table {
+  border-collapse: collapse;
+  color: #ddd;
+  width: 100%;
+}
+.table th {
+  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 1.2em;
+  padding: 0.6em !important;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+}
+.table th, .table td {
+  border-bottom: 1px solid #00b2ed;
+  padding: 1em;
+}
+.table th:not(:first-child), .table td:not(:first-child) {
+  text-align: center;
+}
+.table tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.no-data {
+  font-size: 1.2em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.crud-button {
+  background-color: transparent;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  opacity: 0.6;
+  transition: all 0.5s;
+}
+.crud-button:hover {
+  opacity: 1;
+}
+
+.crud-delete-box {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 0, 0, 0.7);
+  padding: 0.3em;
+  display: none;
+}
+.crud-delete-box > button {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-crud-actions] {
+  position: relative;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 1600px) {
+  #sidebar {
+    width: 15vw;
+  }
+
+  #content {
+    margin-left: 15vw;
+  }
+}
