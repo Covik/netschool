@@ -22,43 +22,11 @@
                 <div id="user__avatar"><img src="http://www.adtechnology.co.uk/images/UGM-default-user.png" alt="" /></div><!--
                 --><div id="user__name">{{ $au->name }}</div>
             </div>
-            <ul id="navigation">
-                @if($au->isAdmin())
-                    <li class="navigation--active">
-                        <div class="navigation__icon">
-                            <i class="glyphicon glyphicon-home"></i>
-                        </div>
-                        <a href="/">Početna</a>
-                    </li>
-                    <li>
-                        <div class="navigation__icon">
-                            <i class="glyphicon glyphicon-file"></i>
-                        </div>
-                        <a href="/files">Datoteke</a>
-                    </li>
-                    <li>
-                        <div class="navigation__icon">
-                            <i class="glyphicon glyphicon-user"></i>
-                        </div>
-                        <a href="/professors">Nastavnici</a>
-                    </li>
-                    <li>
-                        <div class="navigation__icon">
-                            <i class="glyphicon glyphicon-education"></i>
-                        </div>
-                        <a href="/students">Učenici</a>
-                    </li>
-                    <li>
-                        <div class="navigation__icon">
-                            <i class="glyphicon glyphicon-send"></i>
-                        </div>
-                        <a href="/courses">Smjerovi</a>
-                    </li>
-                @endif
-            </ul>
+            {!! $navigation->asUl(['id' => 'navigation']) !!}
         </aside>
         <main id="content">
             <div id="error-log"></div>
+
             @yield('content')
         </main>
     </body>

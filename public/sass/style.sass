@@ -77,15 +77,16 @@ button
   text-align: left
 
   > li
-    padding: 1em
     cursor: pointer
     text-transform: uppercase
     transition: all 0.5s
 
     &:not(.navigation--active):hover
-      background-color: rgba(#000, 0.2)
+      background-color: rgba(#000, 0.1)
     
   a
+    display: block
+    padding: 1em
     text-decoration: none
     color: inherit
     text-shadow: 0 2px 6px rgba(#000, 0.3)
@@ -176,6 +177,41 @@ button
 
   tr:nth-child(odd)
     background-color: rgba(#000, 0.04)
+
+
+.no-data
+  font-size: 1.2em
+  padding: 0.5em
+  text-align: center
+
+.crud-button
+  background-color: transparent
+  box-shadow: none
+  border: 0
+  border-radius: 0
+  opacity: 0.6
+  transition: all 0.5s
+
+  &:hover
+    opacity: 1
+
+.crud-delete-box
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+  background-color: rgba(#F00, 0.7)
+  padding: 0.3em
+  display: none
+
+  > button
+    background-color: rgba(#000, 0.2)
+
+[data-crud-actions]
+  position: relative
+  overflow: hidden
 
 @media only screen and (min-width: 1600px)
   #sidebar

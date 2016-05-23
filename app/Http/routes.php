@@ -28,8 +28,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/register', ['middleware' => ['guest', 'ajax'], 'uses' => 'HomeController@register']);
 
     // Admin
-    Route::group([], function () {
-        Route::get('/files', ['middleware' => 'auth', 'uses' => 'FileController@index']);
-        Route::resource('courses', 'CourseController', ['only' => ['index', 'store', 'update', 'delete']]);
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resource('courses', 'CourseController', ['only' => ['index', 'store', 'update', 'destroy']]);
     });
 });

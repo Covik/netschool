@@ -10,6 +10,11 @@ use App\Course;
 
 class CourseController extends Controller
 {
+    public $rules = [
+        'name' => 'required|string|max:30',
+        'duration' => 'required|integer|in:3,4,5'
+    ];
+
     public function index() {
         $courses = Course::all();
 
@@ -17,10 +22,7 @@ class CourseController extends Controller
     }
 
     public function store(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:30',
-            'duration' => 'required|integer|in:3,4,5'
-        ]);
+        $validator = Validator::make($request->all(), $this->rules);
 
         if($validator->fails()) {
             return response()->json([
@@ -43,5 +45,53 @@ class CourseController extends Controller
             'success' => false,
             'output' => ['Dogodila se neočekivana greška!']
         ]);
+    }
+
+    public function update(Request $request, $id) {
+        $validator = Validator::make($request->all(), $this->rules);
+
+        if($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'output' => $validator->errors()->all()
+            ]);
+        }
+
+        try {
+            $course = Course::find($id);
+
+            $course->name = $request->input('name');
+            $course->duration = $request->input('duration');
+
+            $course->save();
+
+            return response()->json([
+                'success' => true,
+                'output' => ['Uspješno ste uredili ovaj smjer!'],
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'output' => ['Dogodila se neočekivana greška!']
+            ]);
+        }
+    }
+
+    public function destroy($id) {
+        try {
+            $course = Course::find($id);
+
+            $course->delete();
+
+            return response()->json([
+                'success' => true,
+                'output' => ['Uspješno ste uklonili ovaj smjer!'],
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'output' => ['Dogodila se neočekivana greška!']
+            ]);
+        }
     }
 }

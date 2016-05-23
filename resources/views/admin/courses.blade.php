@@ -2,6 +2,34 @@
 
 @extends('master')
 
+@section('head')
+    <script src="/scripts/crud.js"></script>
+    <script>
+        $('#courses-body').crud({
+            updateOptions: {
+                url: '/courses/{id}',
+                type: 'PUT',
+                element: '.crud-modify'
+            },
+            deleteOptions: {
+                url: '/courses/{id}',
+                type: 'DELETE',
+                element: '.crud-delete'
+            },
+            def: {
+                'name': {
+                    'type': 'string',
+                    'length': 30
+                },
+                'duration': {
+                    'type': 'number',
+                    'select': [3,4,5]
+                }
+            }
+        });
+    </script>
+@endsection
+
 @section('content')
     <div id="courses">
         <div id="courses__append" class="default__append__component">
@@ -27,7 +55,7 @@
         </div>
 
         <div class="data-display1">
-            @if(!empty($courses))
+            @if(count($courses) > 0)
                 <table class="table">
                     <thead>
                         <tr>
@@ -36,21 +64,21 @@
                             <th>Akcije</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="courses-body">
                 @foreach($courses as $course)
-                    <tr>
-                        <td>{{ $course->name }}</td>
-                        <td>{{ $course->duration }}</td>
-                        <td>
-                            <i class="glyphicon glyphicon-pencil"></i>
-                            <i class="glyphicon glyphicon-remove"></i>
+                    <tr data-crud-id="{{ $course->id }}">
+                        <td data-crud-ref="name">{{ $course->name }}</td>
+                        <td data-crud-ref="duration">{{ $course->duration }}</td>
+                        <td data-crud-actions>
+                            <button class="crud-modify crud-button"><i class="glyphicon glyphicon-pencil"></i></button>
+                            <button class="crud-delete crud-button"><i class="glyphicon glyphicon-remove"></i></button>
                         </td>
                     </tr>
                 @endforeach
                     </tbody>
                 </table>
             @else
-                <p>Nema smjerova!</p>
+                <p class="no-data">Nema smjerova!</p>
             @endif
         </div>
     </div>

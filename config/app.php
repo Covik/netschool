@@ -160,6 +160,10 @@ return [
          * Custom Providers
          */
         App\Providers\AuthenticatedUserProvider::class,
+<<<<<<< HEAD
+=======
+        Lavary\Menu\ServiceProvider::class,
+>>>>>>> origin/master
     ],
 
     /*
@@ -205,6 +209,10 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+<<<<<<< HEAD
+=======
+        'Menu'      => 'Lavary\Menu\Facade',
+>>>>>>> origin/master
 
     ],
 
