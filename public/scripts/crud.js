@@ -102,18 +102,20 @@
             this.props.currentUpdate.id = parseInt($itemParent.attr('data-crud-id'), 10);
             for(var dNum in o.def) {
                 var d = o.def[dNum],
-                    $el = $itemParent.find('[data-crud-ref="'+ dNum +'"]');
+                    $el = $itemParent.find('[data-crud-ref="'+ dNum +'"]'),
+                    defaultValue = $el.is('[data-crud-value]') ? $el.attr('data-crud-value') : $el.text();
 
                 this.props.currentUpdate.attributes[dNum] = $el.text();
 
-                var inputHTML = '<input type="'+ d.type +'"'+(d.length > 0 ? ' maxlength="'+ d.length +'"' : '')+' value="'+ $el.text() +'" />';
+                var inputHTML = '<input type="'+ d.type +'"'+(d.length > 0 ? ' maxlength="'+ d.length +'"' : '')+' value="'+ defaultValue +'" />';
 
-                if(d.hasOwnProperty('select') && d.select.length > 0) {
+                if(d.hasOwnProperty('select')) {
                     inputHTML = '<select name="'+dNum+'">';
-                    for(var option in d.select) {
-                        var opt = d.select[option];
-                        inputHTML += '<option value="'+ opt +'"'+ (opt == $el.text() ? ' selected' : '') +'>'+ opt +'</option>';
-                    }
+                    $.each(d.select, function(i, val) {
+                        var index = $.isArray(d.select) ? val : i;
+
+                        inputHTML += '<option value="'+ index +'"'+ (index == defaultValue ? ' selected' : '') +'>'+ val +'</option>';
+                    });
                     inputHTML += '</select>'
                 }
 
@@ -130,7 +132,7 @@
 
             var $itemParent = $('[data-crud-id="'+ id +'"]');
 
-            var attrs = successfulReset ? this.__getUpdateData() : this.props.currentUpdate.attributes;
+            var attrs = successfulReset ? (!$.isEmptyObject(successfulReset) ? successfulReset : this.__getUpdateData()) : this.props.currentUpdate.attributes;
             for(var i in attrs) {
                 var val = attrs[i];
 
@@ -158,7 +160,7 @@
             })
             .done(function(response) {
                 handleErrorBar((response.success ? 'add' : 'remove') + 'Class', response.output);
-                parent._updateReset(null, true);
+                if(response.success) parent._updateReset(null, response.fields);
             })
             .fail(function() {
                 handleErrorBar('removeClass', ['Dogodila se neočekivana greška. Pokušajte kasnije!']);
@@ -174,7 +176,7 @@
                     value = null,
                     $el = $itemParent.find('[data-crud-ref="'+ i +'"]');
 
-                if(d.select && d.select.length > 0) value = $el.find('option:selected').val();
+                if(d.select) value = $el.find('option:selected').val();
                 else value = $el.find('input,textarea').val();
 
                 data[i] = value;

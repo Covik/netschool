@@ -37,7 +37,7 @@
             <form class="append-form" method="post" action="/courses" onsubmit="return false;">
                 <div>
                     Ime:<br />
-                    <input type="text" name="name" autocomplete="off" />
+                    <input type="text" name="name" maxlength="30" autocomplete="off" />
                 </div>
 
                 <div>
@@ -54,7 +54,7 @@
             </form>
         </div>
 
-        <div class="data-display1">
+        <div>
             @if(count($courses) > 0)
                 <table class="table">
                     <thead>

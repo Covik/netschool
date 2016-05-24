@@ -68,6 +68,10 @@ class CourseController extends Controller
             return response()->json([
                 'success' => true,
                 'output' => ['Uspješno ste uredili ovaj smjer!'],
+                'fields' => [
+                    'name' => $course->name,
+                    'duration' => $course->duration
+                ]
             ]);
         } catch(\Exception $e) {
             return response()->json([

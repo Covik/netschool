@@ -18,12 +18,13 @@ class Menu
         
         if(($user = $request->user())) {
             \Menu::make('navigation', function ($menu) use ($user) {
-                $menu->add('Home');
-                $menu->home->prepend('<div class="navigation__icon"><i class="glyphicon glyphicon-home"></i></div>');
+                $menu->add('Početna');
+                $menu->pocetna->prepend('<div class="navigation__icon"><i class="glyphicon glyphicon-home"></i></div>');
 
 
                 $menu->add('Datoteke', 'files');
                 $menu->datoteke->prepend('<div class="navigation__icon"><i class="glyphicon glyphicon-file"></i></div>');
+
 
                 if($user->isAdmin()) {
                     $menu->add('Nastavnici', 'professors');
@@ -36,6 +37,10 @@ class Menu
 
                     $menu->add('Smjerovi', 'courses');
                     $menu->smjerovi->prepend('<div class="navigation__icon"><i class="glyphicon glyphicon-send"></i></div>');
+
+
+                    $menu->add('Razredi', 'classes');
+                    $menu->razredi->prepend('<div class="navigation__icon"><i class="glyphicon glyphicon-bell"></i></div>');
 
 
                     $menu->add('Predmeti', 'subjects');

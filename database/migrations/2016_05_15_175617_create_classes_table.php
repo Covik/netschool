@@ -14,7 +14,7 @@ class CreateClassesTable extends Migration
     {
         Schema::create('classes', function(Blueprint $table) {
             $table->increments('id');
-            $table->tinyInteger('year');
+            $table->mediumInteger('year');
             $table->string('label', 3);
         });
     }

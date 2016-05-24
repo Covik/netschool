@@ -13,8 +13,8 @@ class ForeignKeyClassesTable extends Migration
     public function up()
     {
         Schema::table('classes', function (Blueprint $table) {
-            $table->integer('course', false)->unsigned()->index();
-            $table->foreign('course')->references('id')->on('courses');
+            $table->integer('course_id', false)->unsigned()->index();
+            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 

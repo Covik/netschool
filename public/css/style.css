@@ -167,9 +167,10 @@ button {
   display: none;
   position: fixed;
   top: 0;
+  z-index: 1;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(189, 60, 60, 0.66);
+  background-color: #bd3c3c;
   padding: 0.7em 1em;
   border-radius: 0 0 3px 3px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -191,6 +192,7 @@ button {
   left: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
   width: 20vw;
 }
 .default__append__component + div {
@@ -228,6 +230,7 @@ button {
   border-collapse: collapse;
   color: #ddd;
   width: 100%;
+  table-layout: fixed;
 }
 .table th {
   background-color: rgba(0, 0, 0, 0.2);
@@ -240,6 +243,7 @@ button {
 .table th, .table td {
   border-bottom: 1px solid #00b2ed;
   padding: 1em;
+  width: 100%;
 }
 .table th:not(:first-child), .table td:not(:first-child) {
   text-align: center;
