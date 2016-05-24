@@ -13,7 +13,7 @@ class UserClassFK extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('class')->references('id')->on('classes');
+            $table->foreign('class_id')->references('id')->on('classes');
         });
     }
 

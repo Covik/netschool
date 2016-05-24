@@ -31,5 +31,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('courses', 'CourseController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::resource('classes', 'ClassController', ['only' => ['index', 'store', 'update', 'destroy']]);
+        Route::resource('professors', 'ProfessorsController', ['only' => ['index', 'store', 'update', 'destroy']]);
     });
 });

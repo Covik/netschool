@@ -10,6 +10,8 @@ class TheClass extends Model
 {
     public $timestamps = false;
 
+    protected $softDelete = false;
+
     public $table = 'classes';
 
     public function course() {
