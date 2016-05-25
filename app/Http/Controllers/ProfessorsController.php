@@ -23,7 +23,7 @@ class ProfessorsController extends Controller
 
     public function store(Request $request) {
         $rules = $this->rules;
-        $rules['password'] = 'required|string|max:65|min:8|confirmed';
+        $rules['password'] = 'required|string|max:65|min:6|confirmed';
 
         $validator = Validator::make($request->all(), $rules);
 

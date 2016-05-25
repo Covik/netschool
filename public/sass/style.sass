@@ -50,6 +50,7 @@ button
   top: 0
   bottom: 0
   left: 0
+  z-index: 1
 
 #user
   background-color: rgba(#000, 0.2)
@@ -104,7 +105,7 @@ button
   display: none
   position: fixed
   top: 0
-  z-index: 1
+  z-index: 2
   left: 50%
   transform: translateX(-50%)
   background-color: rgba(189, 60, 60, 1)
@@ -122,10 +123,9 @@ button
 
 // Append form
 .default__append__component
-  position: absolute
+  position: fixed
   top: 0
   bottom: 0
-  left: 0
   overflow: hidden
 
   background-color: rgba(#000, 0.08)
@@ -163,6 +163,16 @@ button
   color: #ddd
   width: 100%
   table-layout: fixed
+
+  a:link, a:visited
+    text-decoration: none
+    color: darken($primary-color, 10%)
+    border-bottom: 2px solid rgba(darken($primary-color, 5%), 0.7)
+    transition: all 0.5s
+    font-weight: bold
+
+  a:hover
+    color: darken($primary-color, 5%)
 
   th
     background-color: rgba(#000, 0.2)
@@ -218,6 +228,54 @@ button
   overflow: hidden
 
 
+#subject__name
+  padding: 1em
+  background-color: rgba(#000, 0.1)
+  font-size: 1.5em
+  +md-shadow(2)
+
+#subject__courses__actions
+  background-color: rgba(#000, 0.07)
+  padding: 0.8em
+  +md-shadow(1)
+
+  > button
+    background-color: rgba(#000, 0.1)
+    border-radius: 2px
+    
+    &:hover
+      background-color: rgba(#000, 0.15)
+
+#subject__courses
+  +roboto300
+
+  > li
+    padding: 1em
+    background-color: rgba(#000, 0.02)
+    border-bottom: 1px solid rgba(#000, 0.1)
+    transition: all 0.5s
+
+    &:hover
+      background-color: rgba(#000, 0.06)
+
+
+.courses__title
+  font-size: 1.3em
+
+.courses__classes
+  margin-top: 0.5em
+  margin-left: 0.5em
+
+.courses__classes__year
+  display: inline-block
+  background-color: rgba(#000, 0.04)
+  margin: 0 0.2em
+  padding: 0.2em
+  cursor: pointer
+  transition: all 0.5s
+
+  &:hover
+    background-color: rgba(#000, 0.1)
 
 @media only screen and (min-width: 1600px)
   #sidebar

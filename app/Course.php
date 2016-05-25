@@ -11,6 +11,10 @@ class Course extends Model
     protected $softDelete = false;
 
     public function classes() {
-        return $this->hasMany('App\TheClass', 'course', 'course');
+        return $this->hasMany('App\TheClass');
+    }
+
+    public function subjects() {
+        return $this->belongsToMany('App\Subjects', 'courses_subjects');
     }
 }

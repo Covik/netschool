@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     /* Append Form Handler
      --Start--
-    */
+     */
 
     $('.append-form').submit(function (e) {
         e.preventDefault();
@@ -27,7 +27,57 @@ $(document).ready(function() {
 
     /* Append Form Handler
      --End--
-    */
+     */
+
+
+    /* Select subject courses control
+      --Start--
+     */
+
+    var coursesSelectedAll = false;
+    $('#subject__courses__checkbox__control').click(function() {
+        var $el = $('#subject__courses').find('input:checkbox');
+
+        if(!coursesSelectedAll) $(this).html('<i class="glyphicon glyphicon-unchecked"></i> Odznači sve');
+        else $(this).html('<i class="glyphicon glyphicon-check"></i> Označi sve');
+
+        coursesSelectedAll = !coursesSelectedAll;
+
+        $el.each(function() {
+            $(this)[0].checked = coursesSelectedAll;
+        });
+    });
+
+    /* Select subject courses control
+     --End--
+     */
+
+    /* Subject courses save
+     --Start--
+     */
+
+    $('#subject__courses__save').click(function () {
+        var data = {};
+
+        $('#subject__courses').find('> li').each(function () {
+            var values = [];
+
+            $(this).find('input:checkbox').each(function () {
+               values.push($(this).is(':checked'));
+            });
+
+            data[$(this).attr('data-id')] = values;
+        });
+
+        $.ajax({
+            type: 'POST',
+            data: {courses: data}
+        });
+    });
+
+    /* Subject courses save
+     --End--
+     */
 });
 
 /* Error Handler
