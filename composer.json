@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "doctrine/dbal": "*",
-        "lavary/laravel-menu": "dev-master"
+        "lavary/laravel-menu": "dev-master",
+        "caouecs/laravel-lang": "~3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

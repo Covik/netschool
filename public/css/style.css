@@ -232,6 +232,9 @@ button {
   width: 100%;
   table-layout: fixed;
 }
+.table input, .table select, .table option, .table button {
+  max-width: 100%;
+}
 .table a:link, .table a:visited {
   text-decoration: none;
   color: #008cba;
