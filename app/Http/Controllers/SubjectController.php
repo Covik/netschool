@@ -122,13 +122,13 @@ class SubjectController extends Controller
             foreach ($request->input('courses') as $course => $years) {
                 foreach ($years as $year => $value) {
                     $year = $year + 1;
-                    //$value = !!$value;
                     $exists = count($subject->courses()->where('course_id', '=', $course)->where('course_year', '=', $year)->get());
+
                     if ($value === 'true' && $exists == 0) {
                         $subject->courses()->attach($course, ['course_year' => $year]);
                         $response->added ++;
                     } else if ($value === 'false' && $exists == 1) {
-                        \DB::table('courses_subjects')->where('course_id', '=', $course)->where('course_year', $year)->where('subject_id', '=', $id)->delete();
+                        \DB::table('courses_subjects')->where('course_id', '=', $course)->where('course_year', $year)->where('subject_id', '=', $subject->id)->delete();
                         $response->removed ++;
                     }
                 }
