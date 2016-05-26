@@ -16,7 +16,7 @@
                     Razredi:
                     @for($r = 1; $r <= $course->duration; $r++)
                         <label class="courses__classes__year">
-                            <input type="checkbox" {{ count($subject->courses()->where('course_id', '=', $course->id)->where('course_year', '=', $r)->get()) == 1 ? ' checked' : '' }} /> {{ $r }}. razred
+                            <input type="checkbox" {{ count($subject->courses()->where('course_id', '=', $course->id)->where('course_year', '=', $r)->get()) == 1 ? ' checked' : '' }} autocomplete="off" /> {{ $r }}. razred
                         </label>
                     @endfor
                 </div>

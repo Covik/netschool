@@ -56,7 +56,7 @@
                     @foreach($subjects as $subject)
                         <tr data-crud-id="{{ $subject->id }}">
                             <td data-crud-ref="name">{{ $subject->name }}</td>
-                            <td><a href="/subjects/{{ $subject->id }}">{{ count($subject->courses) }}</a></td>
+                            <td><a href="/subjects/{{ str_slug($subject->name, '-') }}">{{ count($subject->courses) }}</a></td>
                             <td data-crud-actions>
                                 <button class="crud-modify crud-button"><i class="glyphicon glyphicon-pencil"></i></button>
                                 <button class="crud-delete crud-button"><i class="glyphicon glyphicon-remove"></i></button>

@@ -72,6 +72,12 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             data: {courses: data}
+        })
+        .done(function(response) {
+            handleErrorBar((response.success ? 'add' : 'remove') + 'Class', response.output);
+        })
+        .fail(function() {
+            handleErrorBar('removeClass', ['Dogodila se neočekivana greška. Pokušajte kasnije!']);
         });
     });
 

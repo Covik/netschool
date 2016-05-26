@@ -61,6 +61,7 @@
                         <tr>
                             <th>Ime</th>
                             <th>Trajanje (godina)</th>
+                            <th>Predmeta</th>
                             <th>Akcije</th>
                         </tr>
                     </thead>
@@ -69,6 +70,7 @@
                     <tr data-crud-id="{{ $course->id }}">
                         <td data-crud-ref="name">{{ $course->name }}</td>
                         <td data-crud-ref="duration">{{ $course->duration }}</td>
+                        <td>{{ count($course->subjects()->groupBy(['course_id', 'subject_id'])->get()) }}</td>
                         <td data-crud-actions>
                             <button class="crud-modify crud-button"><i class="glyphicon glyphicon-pencil"></i></button>
                             <button class="crud-delete crud-button"><i class="glyphicon glyphicon-remove"></i></button>

@@ -15,6 +15,7 @@ class AddSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 60);
+            $table->string('slug', 70);
         });
 
         Schema::create('courses_subjects', function (Blueprint $table) {

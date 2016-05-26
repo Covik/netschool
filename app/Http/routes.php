@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('classes', 'ClassController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::resource('professors', 'ProfessorsController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::resource('subjects', 'SubjectController', ['only' => ['index', 'store', 'update', 'destroy']]);
-        Route::get('/subjects/{id}', 'SubjectController@single');
-        Route::post('/subjects/{id}', 'SubjectController@saveCourses');
+        Route::get('/subjects/{slug}', 'SubjectController@single');
+        Route::post('/subjects/{slug}', 'SubjectController@saveCourses');
     });
 });
