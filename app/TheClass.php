@@ -18,6 +18,10 @@ class TheClass extends Model
         return $this->belongsTo('App\Course');
     }
 
+    public function students() {
+        return $this->hasMany('App\User', 'class_id');
+    }
+
     public function getNameAttribute() {
         return $this->getClassNumber().'.'.$this->label;
     }

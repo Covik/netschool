@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'class'
+        'name', 'email', 'password', 'class_id'
     ];
 
     /**
@@ -25,6 +25,22 @@ class User extends Authenticatable
     ];
 
     protected $softDelete = false;
+
+    public function theClass() {
+        return $this->belongsTo('App\TheClass', 'class_id');
+    }
+
+    public function scopeAdmins($query) {
+        return $query->where('role', '=', config('roles.admin'));
+    }
+
+    public function scopeProfessors($query) {
+        return $query->where('role', '=', config('roles.professor'));
+    }
+
+    public function scopeStudents($query) {
+        return $query->where('role', '=', config('roles.student'));
+    }
 
     public function isAdmin() {
         return $this->role == config('roles.admin');

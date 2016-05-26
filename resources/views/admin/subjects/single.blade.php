@@ -1,4 +1,4 @@
-<?php $title = $subject->name; ?>
+<?php $title = $subject->name.' - Predmeti'; ?>
 
 @extends('master')
 

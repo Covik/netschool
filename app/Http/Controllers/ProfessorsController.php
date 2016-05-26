@@ -16,7 +16,7 @@ class ProfessorsController extends Controller
     ];
 
     public function index() {
-        $professors = User::where('role', '=', config('roles.professor'))->get();
+        $professors = User::professors()->get();
 
         return view('admin.professors', compact('professors'));
     }

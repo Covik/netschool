@@ -35,5 +35,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('subjects', 'SubjectController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::get('/subjects/{slug}', 'SubjectController@single');
         Route::post('/subjects/{slug}', 'SubjectController@saveCourses');
+        Route::resource('students', 'StudentController', ['only' => ['index', 'store', 'update', 'destroy']]);
     });
 });
