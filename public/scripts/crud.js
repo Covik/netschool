@@ -66,10 +66,12 @@
             var o = this.options,
                 parent = this;
 
-            $(document).on('click', o.updateOptions.element, function (e) {
-                e.preventDefault();
-                parent._updateStart($(this));
-            });
+            if(o.updateOptions.element !== null) {
+                $(document).on('click', o.updateOptions.element, function (e) {
+                    e.preventDefault();
+                    parent._updateStart($(this));
+                });
+            }
 
             $(document).on('click', '.crud-cancel-update', function (e) {
                 e.preventDefault();
@@ -81,11 +83,12 @@
                 parent._updateSave($(this));
             });
 
-
-            $(document).on('click', o.deleteOptions.element, function (e) {
-                e.preventDefault();
-                parent._deleteStart($(this));
-            });
+            if(o.deleteOptions.element !== null) {
+                $(document).on('click', o.deleteOptions.element, function (e) {
+                    e.preventDefault();
+                    parent._deleteStart($(this));
+                });
+            }
         },
         _getURLWithID: function(url, id) {
             return url.replace(/\{id\}/g, id);
@@ -213,10 +216,13 @@
                 })
                 .done(function(response) {
                     handleErrorBar((response.success ? 'add' : 'remove') + 'Class', response.output);
-                    $itemParent.fadeOut(500, function() {
-                        $(this).remove();
-                    });
-                    parent.props.deleteInProgress = false;
+                    
+                    if(response.success) {
+                        $itemParent.fadeOut(500, function () {
+                            $(this).remove();
+                        });
+                        parent.props.deleteInProgress = false;
+                    }
                 })
                 .fail(function() {
                     handleErrorBar('removeClass', ['Dogodila se neočekivana greška. Pokušajte kasnije!']);
