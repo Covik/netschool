@@ -180,7 +180,7 @@ class ClassController extends Controller
         } catch(\Exception $e) {
             return response()->json([
                 'success' => false,
-                'output' => ['Dogodila se neočekivana greška!', ($e instanceof ModelNotFoundException ? 'jbg' : 'nista')]
+                'output' => ['Dogodila se neočekivana greška!']
             ]);
         }
     }
