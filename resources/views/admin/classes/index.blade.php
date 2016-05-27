@@ -105,6 +105,7 @@ $crudCourses .= '}';
                         <th>Razred</th>
                         <th>Školska godina</th>
                         <th>Smjer</th>
+                        <th>Predmeta</th>
                         <th>Učenika</th>
                         <th>Akcije</th>
                     </tr>
@@ -115,6 +116,7 @@ $crudCourses .= '}';
                             <td data-crud-ref="label" data-crud-value="{{ $class->label }}">{{ $class->name }}</td>
                             <td data-crud-ref="year" data-crud-value="{{ $class->year }}">{{ $class->year }}. / {{ $class->year + 1 }}.</td>
                             <td data-crud-ref="course" data-crud-value="{{ $class->course->id }}">{{ $class->course->name }}</td>
+                            <td><a href="{{ route('single-class', ['id' => $class->id]) }}">{{ count($class->ps) }}</a></td>
                             <td>{{ count($class->students) }}</td>
                             <td data-crud-actions>
                                 <button class="crud-modify crud-button"><i class="glyphicon glyphicon-pencil"></i></button>

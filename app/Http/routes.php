@@ -22,6 +22,8 @@
 |
 */
 
+use App\PCS;
+
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
     Route::post('/login', ['middleware' => ['guest', 'ajax'], 'uses' => 'HomeController@signin']);
@@ -31,6 +33,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('courses', 'CourseController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::resource('classes', 'ClassController', ['only' => ['index', 'store', 'update', 'destroy']]);
+        Route::get('/classes/{id}', ['uses' => 'ClassController@single', 'as' => 'single-class']);
+        Route::post('/classes/{id}/ps', 'ClassController@storePS');
+        Route::delete('/classes/{id}/ps/{psid}', 'ClassController@destroyPS');
         Route::resource('professors', 'ProfessorsController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::resource('subjects', 'SubjectController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::get('/subjects/{slug}', 'SubjectController@single');

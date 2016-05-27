@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\ProfessorSubject;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\TheClass;
 use App\Course;
 use Validator;
+use App\User;
 
 class ClassController extends Controller
 {
@@ -21,7 +23,7 @@ class ClassController extends Controller
         $classes = TheClass::with('course')->get();
         $courses = Course::all();
 
-        return view('admin.classes', compact('classes', 'courses'));
+        return view('admin.classes.index', compact('classes', 'courses'));
     }
 
     public function store(Request $request) {
@@ -113,6 +115,85 @@ class ClassController extends Controller
             return response()->json([
                 'success' => true,
                 'output' => ['Uspješno ste uklonili ovaj razred!'],
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'output' => ['Dogodila se neočekivana greška!']
+            ]);
+        }
+    }
+
+    public function single($id) {
+        $class = TheClass::find($id);
+
+        $professors = User::professors()->get();
+
+        $allSubjects = $class->course->subjects()->where('course_year', '=', $class->getClassNumber())->get();
+
+        $exceptSubjects = [];
+
+        if(!empty($class->ps)) {
+            foreach ($class->ps as $ps) {
+                $exceptSubjects[] = $ps->subject->id;
+            }
+        }
+
+        $subjects = $allSubjects->filter(function($subject) use ($exceptSubjects) {
+            return !in_array($subject->id, $exceptSubjects);
+        });
+
+        return view('admin.classes.single', compact('class', 'subjects', 'professors'));
+    }
+
+    public function storePS(Request $request, $id) {
+        $class = TheClass::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'subject' => 'required|integer|exists:subjects,id',
+            'professor' => 'required|integer|exists:users,id,role,'.config('roles.professor')
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'output' => $validator->errors()->all()
+            ]);
+        }
+
+        try {
+
+            $subject = $request->input('subject');
+            $professor = $request->input('professor');
+
+            $ps = ProfessorSubject::firstOrCreate([
+                'professor_id' => $professor,
+                'subject_id' => $subject
+            ]);
+
+            $class->ps()->attach($ps->id);
+
+            return response()->json([
+                'success' => true,
+                'output' => ['Uspješno ste dodali predmet i nastavnika!'],
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'output' => ['Dogodila se neočekivana greška!', ($e instanceof ModelNotFoundException ? 'jbg' : 'nista')]
+            ]);
+        }
+    }
+    
+    public function destroyPS($id, $psid) {
+        try {
+            $class = TheClass::find($id);
+
+            $class->ps()->detach($psid);
+
+            return response()->json([
+                'success' => true,
+                'output' => ['Uspješno ste uklonili ovaj predmet!'],
             ]);
         } catch(\Exception $e) {
             return response()->json([

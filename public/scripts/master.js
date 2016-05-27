@@ -18,7 +18,7 @@ $(document).ready(function() {
             data: $(this).serialize()
         })
         .done(function(response) {
-            handleErrorBar((response.success ? 'add' : 'remove') + 'Class', response.output);
+            handleErrorBar((response.success ? 'add' : 'remove') + 'Class', response.output, true);
         })
         .fail(function() {
             handleErrorBar('removeClass', ['Dogodila se neočekivana greška. Pokušajte kasnije!']);
@@ -90,7 +90,7 @@ $(document).ready(function() {
     --Start--
 */
 
-var handleErrorBar = function(method, response) {
+var handleErrorBar = function(method, response, refreshSuccess) {
     var responseMarkup = '';
 
     $.each(response, function (i, val) {
@@ -98,9 +98,12 @@ var handleErrorBar = function(method, response) {
     });
 
     if(method == 'addClass') setTimeout(function() {
-        //window.location.reload();
-        $.handleError(false);
+        if(refreshSuccess) window.location.reload();
+        else $.handleError(false);
     }, 2000);
+    else setTimeout(function () {
+        $.handleError(false);
+    }, 7000);
 
     $error[method]('success').html(responseMarkup);
     $.handleError(true);

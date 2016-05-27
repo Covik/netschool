@@ -22,6 +22,10 @@ class TheClass extends Model
         return $this->hasMany('App\User', 'class_id');
     }
 
+    public function ps() {
+        return $this->belongsToMany('App\ProfessorSubject', 'professor_class_subject', 'class_id', 'ps_id');
+    }
+
     public function getNameAttribute() {
         return $this->getClassNumber().'.'.$this->label;
     }
