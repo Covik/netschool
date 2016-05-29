@@ -22,7 +22,7 @@ class FileController extends Controller
     public function index() {
         $user = Auth::user();
 
-        if($user->isAdmin()) $files = File::all();
+        if($user->isAdmin()) $files = File::orderBy('created_at', 'desc')->get();
         else $files = File::where('user_id', '=', $user->id)->get();
 
         return view('home.files.index', compact('files'));
