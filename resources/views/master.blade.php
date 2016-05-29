@@ -19,7 +19,7 @@
     <body>
         <aside id="sidebar">
             <div id="user">
-                <div id="user__avatar"><img src="http://www.adtechnology.co.uk/images/UGM-default-user.png" alt="" /></div><!--
+                <div id="user__avatar"><img src="/images/default-user.png" alt="" /></div><!--
                 --><div id="user__name">{{ $au->name }}</div>
             </div>
             {!! $navigation->asUl(['id' => 'navigation']) !!}
