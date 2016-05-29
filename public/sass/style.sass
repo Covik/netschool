@@ -50,7 +50,7 @@ button
   top: 0
   bottom: 0
   left: 0
-  z-index: 1
+  z-index: 4
 
 #user
   background-color: rgba(#000, 0.2)
@@ -195,11 +195,15 @@ button
   tr:nth-child(odd)
     background-color: rgba(#000, 0.04)
 
+.table__empty > td
+  text-align: center
+
 
 .no-data
   font-size: 1.2em
   padding: 0.5em
   text-align: center
+  +roboto300
 
 .crud-button
   background-color: transparent
@@ -235,6 +239,7 @@ button
   padding: 1em
   background-color: rgba(#000, 0.1)
   font-size: 1.5em
+  position: relative
   +md-shadow(2)
 
 #subject__courses__actions
@@ -279,6 +284,200 @@ button
 
   &:hover
     background-color: rgba(#000, 0.1)
+
+
+/* User files */
+#csf
+  height: 100%
+  margin-top: -4.5em
+  padding-top: 4.5em
+
+  section
+    display: inline-block
+    vertical-align: top
+    height: 100%
+    overflow: auto
+
+#csf__subjects
+  width: 30%
+  background-color: rgba(#000, 0.1)
+  border-right: 1px solid rgba(#000, 0.05)
+  box-shadow: 3px 0 7px rgba(0, 0, 0, 0.4)
+  position: relative
+  z-index: 1
+
+.csf__subject
+  padding: 1.5em
+  border-bottom: 1px solid rgba(#000, 0.1)
+  cursor: pointer
+  transition: all 0.5s
+  +roboto300
+
+  &:hover
+    background-color: rgba(#000, 0.05)
+
+  &.csf__subject--active
+    background-color: rgba(#000, 0.1)
+
+.csf__subject__name
+  font-size: 1.2em
+
+.csf__subject__count
+  float: right
+
+  > div
+    display: inline-block
+    width: 1.5em
+    height: 1.5em
+    line-height: 1.5em
+    text-align: center
+    border-radius: 50%
+    background-color: rgba(#fff, 0.2)
+
+#csf__files
+  width: 70%
+
+#csf__files__list > li:not(:first-child)
+  display: none
+
+a.csf__file__download
+  &:link, &:visited
+    border: 0
+    color: white !important
+    text-decoration: none
+  
+#file__upload__button
+  padding: 0.7em
+  font-size: 0.6em
+  background-color: rgba(#000, 0.15)
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  right: 1em
+
+  &:hover
+    background-color: rgba(#000, 0.25)
+
+#hiddenfile
+  height: 0
+  width: 0
+  overflow: hidden
+
+#file__upload__overlay
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  z-index: 99
+  background-color: rgba(#000, 0.3)
+
+#file__upload
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  width: 50%
+  padding: 1em
+  background-color: #ddd
+  border-radius: 3px
+  color: #555
+  +md-shadow(2)
+
+  > h1
+    font-size: 1.3em
+    font-family: Roboto, sans-serif
+
+#file__upload__count
+  color: $primary-color
+
+#file__upload__list
+  margin: 1em 0
+  max-height: 50vh
+  overflow: auto
+
+  > li
+    padding: 0.5em
+    background-color: rgba(#000, 0.1)
+    border-radius: 3px
+    position: relative
+    color: #444
+    overflow: hidden
+
+    &:not(:last-child)
+      margin-bottom: 0.5em
+
+.file__upload__remove
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  right: 0.5em
+  cursor: pointer
+  opacity: 0.5
+  transition: all 0.5s
+
+  &:hover
+    opacity: 1
+
+.file__upload__progress
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  width: 0
+  background-color: rgba(0, 177, 206, 0.5)
+  z-index: -1
+  transition: all 0.5s
+
+  &.success
+    background-color: rgba(0, 180, 0, 0.3)
+    width: 100% !important
+
+  &.error
+    background-color: rgba(#F00, 0.4)
+    width: 100% !important
+
+#file__upload__actions
+  > button
+    background-color: $primary-color
+    border-radius: 3px
+
+/* Professor's classes */
+#csf__classes__list
+  width: 15%
+  background-color: rgba(#000, 0.15)
+  box-shadow: 3px 0 7px rgba(0, 0, 0, 0.4)
+  position: relative
+  z-index: 2
+  +roboto300
+
+  li
+    padding: 1em
+    cursor: pointer
+    border-bottom: 1px solid rgba(#000, 0.1)
+    transition: all 0.5s
+
+    &:hover
+      background-color: rgba(#000, 0.04)
+
+    &.csf__class--active
+      background-color: rgba(#000, 0.1)
+
+.csf__class__name
+  font-size: 1.2em
+
+#csf__classes__content
+  width: 85%
+
+  > ul
+    height: 100%
+
+    > li
+      height: 100%
+
+      &:not(:first-child)
+        display: none
+
 
 @media only screen and (min-width: 1600px)
   #sidebar

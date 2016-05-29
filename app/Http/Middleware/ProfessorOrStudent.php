@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class ProfessorOrStudent
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::user()->isAdmin())  {
+        if(Auth::user()->isProfessor() === false && Auth::user()->isStudent() === false) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Forbidden.', 403);
             } else {

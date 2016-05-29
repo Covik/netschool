@@ -22,12 +22,12 @@
 |
 */
 
-use App\PCS;
-
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
     Route::post('/login', ['middleware' => ['guest', 'ajax'], 'uses' => 'HomeController@signin']);
     Route::post('/register', ['middleware' => ['guest', 'ajax'], 'uses' => 'HomeController@register']);
+    Route::get('/logout', 'HomeController@logout');
+    Route::get('/file/{id}/{name}', ['uses' => 'FileController@get', 'as' => 'file-download']);
 
     // Admin
     Route::group(['middleware' => 'admin'], function () {
@@ -42,4 +42,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/subjects/{slug}', 'SubjectController@saveCourses');
         Route::resource('students', 'StudentController', ['only' => ['index', 'store', 'update', 'destroy']]);
     });
+
+    // Professor/Student
+    Route::group(['middleware' => ['ajax', 'professor-student']], function () {
+        Route::post('/files/store', 'FileController@store');
+    });
+
+    // Files
+    Route::resource('files', 'FileController', ['only' => ['index', 'update', 'destroy']]);
 });

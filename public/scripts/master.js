@@ -84,6 +84,42 @@ $(document).ready(function() {
     /* Subject courses save
      --End--
      */
+
+    /* Subject files tabs
+     --Start--
+     */
+
+    var csfSubjectActive = 'csf__subject--active';
+    $(document).on('click', '.csf__subject:not(.'+ csfSubjectActive +')', function (e) {
+        var i = $(this).index();
+        $('.' + csfSubjectActive).removeClass(csfSubjectActive);
+        $(this).addClass(csfSubjectActive);
+        $('#csf__files__list').find('> li').hide().eq(i).show();
+        currentSubject = $(this).attr('data-id');
+    });
+
+    /* Subject files tabs
+     --End--
+     */
+
+    /* Class list tabs
+     --Start--
+     */
+
+    var csfClassActive = 'csf__class--active';
+    $(document).on('click', '.csf__class__item:not(.'+ csfClassActive +')', function (e) {
+        var i = $(this).index();
+        $('.' + csfClassActive).removeClass(csfClassActive);
+        $(this).addClass(csfClassActive);
+        var $content = $('#csf__classes__content').find('> ul > li').hide().eq(i);
+        $content.show();
+        currentClass = $(this).attr('data-id');
+        currentSubject = $content.find('#csf__subjects li.' + csfSubjectActive).attr('data-id');
+    });
+
+    /* Class list tabs
+     --End--
+     */
 });
 
 /* Error Handler

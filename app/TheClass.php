@@ -38,4 +38,8 @@ class TheClass extends Model
 
         return $year;
     }
+
+    public function files() {
+        return $this->hasMany('App\File', 'class_id');
+    }
 }

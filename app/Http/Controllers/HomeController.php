@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use Mockery\CountValidator\Exception;
 use Validator;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Hash;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -15,8 +16,23 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 class HomeController extends Controller {
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    public function __construct() {
+        $this->middleware('auth', ['only' => 'logout']);
+    }
+
     public function index() {
-        if(Auth::check()) return view('home.logged', ['user' => Auth::user()]);
+        if(Auth::check()) {
+            $user = Auth::user();
+
+            if($user->isAdmin()) return redirect('/files');
+
+            \Menu::get('navigation')->pocetna->active();
+            $roles = array_flip(config('roles'));
+
+            $role = $roles[$user->role];
+
+            return view('home.'.$role);
+        }
         else return view('home.guests');
     }
 
@@ -24,13 +40,18 @@ class HomeController extends Controller {
         $credentials = $request->only('email', 'password');
 
         $validator = Validator::make($credentials, [
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required|min:6'
         ]);
 
         if($validator->fails()) return response()->json([
             'success' => false,
             'output' => $validator->errors()->all()
+        ]);
+
+        if(!empty($student = User::where('email', '=', $request->input('email'))->where('role', '=', config('roles.student'))->first()) && $student->class_id === null) return response()->json([
+            'success' => false,
+            'output' => ['Vaš račun nije potvrđen!']
         ]);
 
         if(Auth::attempt($credentials, $request->has('remember'))) {
@@ -57,18 +78,27 @@ class HomeController extends Controller {
             'output' => $validator->errors()->all()
         ]);
 
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
-        ]);
+        try {
+            User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password'))
+            ]);
 
-        if($user) {
-            Auth::login($user);
             return response()->json([
                 'success' => true,
-                'output' => ['Uspješno ste se registrirali. Preusmjeravanje...']
+                'output' => ['Uspješno ste se registrirali.', 'Administrator treba potvrditi vašu registraciju!']
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'output' => ['Dogodila se neočekivana greška!']
             ]);
         }
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect('/');
     }
 }

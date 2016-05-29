@@ -4,12 +4,13 @@
 
     var methods = {
         init: function(options) {
+            return this.each(function() {
+                var $this = $(this);
 
-            if(typeof this.crudInstance !== 'undefined') return false;
+                if(typeof $this.crudInstance !== 'undefined') return false;
 
-            var o = $.extend($.fn.crud.defaults, options);
-
-            this.crudInstance = new CRUD(this, o);
+                $this.crudInstance = new CRUD($this, $.extend($.fn.crud.defaults, options));
+            });
         }
     };
 
@@ -17,7 +18,6 @@
         if ( methods[method] ) {
             return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
         } else if ( typeof method === 'object' || ! method ) {
-            // Default to "init"
             return methods.init.apply( this, arguments );
         } else {
             $.error( 'Method ' +  method + ' does not exist on jQuery.crud' );
@@ -52,6 +52,9 @@
             },
             deleteInProgress: false
         };
+        this.id = 'crud_js_id_' + Math.floor(Math.random() * 1500000000);
+
+        this.container.attr('data-crud-id', this.id);
 
         this.init();
     }
@@ -64,27 +67,28 @@
         },
         events: function () {
             var o = this.options,
-                parent = this;
+                parent = this,
+                id = '[data-crud-id="' + this.id + '"] ';
 
             if(o.updateOptions.element !== null) {
-                $(document).on('click', o.updateOptions.element, function (e) {
+                $(document).on('click', id + o.updateOptions.element, function (e) {
                     e.preventDefault();
                     parent._updateStart($(this));
                 });
             }
 
-            $(document).on('click', '.crud-cancel-update', function (e) {
+            $(document).on('click', id + '.crud-cancel-update', function (e) {
                 e.preventDefault();
                 parent._updateReset($(this));
             });
 
-            $(document).on('click', '.crud-save-update', function (e) {
+            $(document).on('click', id + '.crud-save-update', function (e) {
                 e.preventDefault();
                 parent._updateSave($(this));
             });
 
             if(o.deleteOptions.element !== null) {
-                $(document).on('click', o.deleteOptions.element, function (e) {
+                $(document).on('click', id + o.deleteOptions.element, function (e) {
                     e.preventDefault();
                     parent._deleteStart($(this));
                 });

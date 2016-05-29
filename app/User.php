@@ -30,6 +30,24 @@ class User extends Authenticatable
         return $this->belongsTo('App\TheClass', 'class_id');
     }
 
+    public function ps() {
+        return $this->hasMany('App\ProfessorSubject', 'professor_id');
+    }
+
+    public function classes() {
+        $classes = [];
+
+        foreach($this->ps as $ps) {
+            foreach($ps->classes as $class) {
+                $id = $class->id;
+                if(!array_key_exists($id, $classes)) $classes[$id] = $class;
+            }
+        }
+
+        return $classes;
+    }
+
+
     public function scopeAdmins($query) {
         return $query->where('role', '=', config('roles.admin'));
     }

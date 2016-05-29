@@ -13,4 +13,8 @@ class Subject extends Model
     public function courses() {
         return $this->belongsToMany('App\Course', 'courses_subjects')->withPivot('course_year');
     }
+
+    public function files() {
+        return $this->hasMany('App\File');
+    }
 }

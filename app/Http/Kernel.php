@@ -37,6 +37,11 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\IsAdmin::class
         ],
 
+        'professor-student' => [
+            \App\Http\Middleware\Authenticate::class,
+            \App\Http\Middleware\ProfessorOrStudent::class
+        ],
+
         'api' => [
             'throttle:60,1',
         ],

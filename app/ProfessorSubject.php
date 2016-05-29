@@ -21,6 +21,6 @@ class ProfessorSubject extends Model
     }
 
     public function classes() {
-        return $this->belongsToMany('App\TheClass', 'professor_class_subject', 'class_id', 'cs_id');
+        return $this->belongsToMany('App\TheClass', 'professor_class_subject', 'ps_id', 'class_id');
     }
 }

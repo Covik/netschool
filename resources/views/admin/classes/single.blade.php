@@ -4,15 +4,6 @@
 
 @section('head')
     <script src="/scripts/crud.js"></script>
-    <script>
-        $('#class__body').crud({
-            deleteOptions: {
-                url: '{{ Request::url().'/ps/{id}' }}',
-                type: 'DELETE',
-                element: '.crud-delete'
-            }
-        });
-    </script>
 @endsection
 
 @section('content')
@@ -72,4 +63,14 @@
             <p class="no-data">Nema predmeta!</p>
         @endif
     </div>
+
+    <script>
+        $('#class__body').crud({
+            deleteOptions: {
+                url: '{{ Request::url().'/ps/{id}' }}',
+                type: 'DELETE',
+                element: '.crud-delete'
+            }
+        });
+    </script>
 @endsection

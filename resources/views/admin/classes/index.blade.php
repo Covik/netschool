@@ -32,34 +32,6 @@ $crudCourses .= '}';
 
 @section('head')
     <script src="/scripts/crud.js"></script>
-    <script>
-        $('#classes-body').crud({
-            updateOptions: {
-                url: '/classes/{id}',
-                type: 'PUT',
-                element: '.crud-modify'
-            },
-            deleteOptions: {
-                url: '/classes/{id}',
-                type: 'DELETE',
-                element: '.crud-delete'
-            },
-            def: {
-                'label': {
-                    'type': 'string',
-                    'length': 3
-                },
-                'year': {
-                    'type': 'number',
-                    'select':{!! $crudYears !!}
-                },
-                'course': {
-                    'type': 'number',
-                    'select':{!! $crudCourses !!}
-                }
-            }
-        });
-    </script>
 @endsection
 
 @section('content')
@@ -131,4 +103,33 @@ $crudCourses .= '}';
             @endif
         </div>
     </div>
+
+    <script>
+        $('#classes-body').crud({
+            updateOptions: {
+                url: '/classes/{id}',
+                type: 'PUT',
+                element: '.crud-modify'
+            },
+            deleteOptions: {
+                url: '/classes/{id}',
+                type: 'DELETE',
+                element: '.crud-delete'
+            },
+            def: {
+                'label': {
+                    'type': 'string',
+                    'length': 3
+                },
+                'year': {
+                    'type': 'number',
+                    'select':{!! $crudYears !!}
+                },
+                'course': {
+                    'type': 'number',
+                    'select':{!! $crudCourses !!}
+                }
+            }
+        });
+    </script>
 @endsection

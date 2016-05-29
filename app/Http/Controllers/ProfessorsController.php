@@ -40,6 +40,7 @@ class ProfessorsController extends Controller
             $professor->name = $request->input('name');
             $professor->email = $request->input('email');
             $professor->role = config('roles.professor');
+            $professor->password = bcrypt($request->input('password'));
 
             $professor->save();
 

@@ -4,26 +4,6 @@
 
 @section('head')
     <script src="/scripts/crud.js"></script>
-    <script>
-        $('#courses-body').crud({
-            updateOptions: {
-                url: '/subjects/{id}',
-                type: 'PUT',
-                element: '.crud-modify'
-            },
-            deleteOptions: {
-                url: '/subjects/{id}',
-                type: 'DELETE',
-                element: '.crud-delete'
-            },
-            def: {
-                'name': {
-                    'type': 'string',
-                    'length': 60
-                }
-            }
-        });
-    </script>
 @endsection
 
 @section('content')
@@ -70,4 +50,25 @@
             @endif
         </div>
     </div>
+
+    <script>
+        $('#subjects-body').crud({
+            updateOptions: {
+                url: '/subjects/{id}',
+                type: 'PUT',
+                element: '.crud-modify'
+            },
+            deleteOptions: {
+                url: '/subjects/{id}',
+                type: 'DELETE',
+                element: '.crud-delete'
+            },
+            def: {
+                'name': {
+                    'type': 'string',
+                    'length': 60
+                }
+            }
+        });
+    </script>
 @endsection

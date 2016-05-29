@@ -4,30 +4,6 @@
 
 @section('head')
     <script src="/scripts/crud.js"></script>
-    <script>
-        $('#courses-body').crud({
-            updateOptions: {
-                url: '/professors/{id}',
-                type: 'PUT',
-                element: '.crud-modify'
-            },
-            deleteOptions: {
-                url: '/professors/{id}',
-                type: 'DELETE',
-                element: '.crud-delete'
-            },
-            def: {
-                'name': {
-                    'type': 'string',
-                    'length': 255
-                },
-                'email': {
-                    'type': 'email',
-                    'length': 255
-                }
-            }
-        });
-    </script>
 @endsection
 
 @section('content')
@@ -89,4 +65,29 @@
             @endif
         </div>
     </div>
+
+    <script>
+        $('#professors-body').crud({
+            updateOptions: {
+                url: '/professors/{id}',
+                type: 'PUT',
+                element: '.crud-modify'
+            },
+            deleteOptions: {
+                url: '/professors/{id}',
+                type: 'DELETE',
+                element: '.crud-delete'
+            },
+            def: {
+                'name': {
+                    'type': 'string',
+                    'length': 255
+                },
+                'email': {
+                    'type': 'email',
+                    'length': 255
+                }
+            }
+        });
+    </script>
 @endsection
