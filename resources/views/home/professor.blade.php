@@ -39,7 +39,6 @@
             </section><!--
             --><section id="csf__classes__content">
                 <ul>
-
                     @foreach($classes as $class)
                         <li class="csf__class" data-id="{{ $class->id }}">@include('home.files.subject-files', ['allPS' => $class->ps()->where('professor_id', '=', $au->id)->get(), 'class' => $class])</li>
                     @endforeach
@@ -47,7 +46,7 @@
             </section>
             </div>
         </div>
-        @include('home.files.crud-script', ['currentSubject' => $firstClass->ps()->first()->subject->id])
+        @include('home.files.crud-script', ['currentSubject' => $firstClass->ps()->where('professor_id', '=', $au->id)->first()->subject->id])
     @else
         <p class="no-data">Nema razreda i predmeta</p>
     @endif

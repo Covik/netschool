@@ -29,4 +29,8 @@ class File extends Model
     public function subject() {
         return $this->belongsTo('App\Subject');
     }
+    
+    public function scopeClassAndYear($query, TheClass $class) {
+        return $query->where('class_id', '=', $class->id)->where('class_year', '=', $class->getClassNumber());
+    }
 }

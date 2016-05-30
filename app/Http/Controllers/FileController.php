@@ -22,7 +22,7 @@ class FileController extends Controller
     public function index() {
         $user = Auth::user();
 
-        if($user->isAdmin()) $files = File::orderBy('created_at', 'desc')->get();
+        if($user->isAdmin()) $files = File::orderBy('created_at', 'desc')->get()->sortBy(function ($file) { return $file->user->isProfessor(); });
         else $files = File::where('user_id', '=', $user->id)->get();
 
         return view('home.files.index', compact('files'));
@@ -60,6 +60,22 @@ class FileController extends Controller
             if($file->isValid()) {
                 $cls = TheClass::findOrFail($class);
 
+                if($user->isStudent()) {
+                    if($user->class_id !== (int) $class) return response()->json([
+                        'success' => false,
+                        'output' => ['Razred nije isti!']
+                    ]);
+                    else if(!$cls->ps()->where('subject_id', '=', $subject)->exists()) return response()->json([
+                        'success' => false,
+                        'output' => ['Krivi predmet!']
+                    ]);
+                }
+
+                if($user->isProfessor() && !$cls->ps()->where('professor_id', '=', $user->id)->where('subject_id', '=', $subject)->exists()) return response()->json([
+                    'success' => false,
+                    'output' => ['Nemate dozvolu za ovaj razred/predmet!']
+                ]);
+
                 $f = new File();
                 $f->filename = $file->getClientOriginalName();
                 $f->description = '';
@@ -81,12 +97,12 @@ class FileController extends Controller
                 ]);
             }
             else return response()->json([
-                'success' => true,
+                'success' => false,
                 'output' => ['Prijenos ne uspješan!']
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'success' => true,
+                'success' => false,
                 'output' => ['Dogodila se neočekivana greška!']
             ]);
         }

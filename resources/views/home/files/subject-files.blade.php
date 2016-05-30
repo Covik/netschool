@@ -3,7 +3,7 @@
         @foreach($allPS as $ps)
             <li data-id="{{ $ps->subject->id }}" class="csf__subject{!! $ps->subject->id == $allPS->first()->subject->id ? ' csf__subject--active' : '' !!}">
                 <span class="csf__subject__name">{{ $ps->subject->name }}</span>
-                <span class="csf__subject__count"><div>{{ count($ps->subject->files()->where('class_id', '=', $class->id)->get()) }}</div></span>
+                <span class="csf__subject__count"><div>{{ count($ps->subject->files()->classAndYear($class)->get()) }}</div></span>
             </li>
         @endforeach
     </ul>
@@ -24,7 +24,7 @@
                     </thead>
 
                     <tbody class="files__list">
-                        @forelse($ps->subject->files()->where('class_id', '=', $class->id)->get() as $file)
+                        @forelse($ps->subject->files()->classAndYear($class)->orderBy('created_at', 'desc')->get()->sortByDesc(function ($file) { return $file->user->isProfessor(); }) as $file)
                             @include('home.files.single', ['file' => $file])
                         @empty
                             <tr class="table__empty">

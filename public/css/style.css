@@ -426,6 +426,10 @@ button {
   display: none;
 }
 
+.csf__file__author__professor {
+  font-style: italic;
+}
+
 a.csf__file__download:link, a.csf__file__download:visited {
   border: 0;
   color: white !important;
