@@ -90,7 +90,9 @@ $(document).ready(function() {
      */
 
     var csfSubjectActive = 'csf__subject--active',
-        csfSubjectShown = 'csf__subject__shown';
+        csfSubjectShown = 'csf__subject__shown',
+        csfSubjectEvents = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
+
     $(document).on('click', '.csf__subject:not(.'+ csfSubjectActive +')', function (e) {
         var i = $(this).index();
         $('.' + csfSubjectActive).removeClass(csfSubjectActive);
@@ -99,10 +101,10 @@ $(document).ready(function() {
         var $content = $('#csf__files__list'),
             $last = $content.find('.' + csfSubjectShown);
 
-        $content.find('> li').removeClass('z2').eq(i).addClass('csf__subject__shown z2').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
-            $last.removeClass(csfSubjectShown);
+        $content.find('> li').removeClass('z2').eq(i).addClass('csf__subject__shown z2').unbind(csfSubjectEvents).one(csfSubjectEvents, function() {
+            $content.find('> li').not('.z2').removeClass(csfSubjectShown);
         });
-        
+
         currentSubject = $(this).attr('data-id');
     });
 
