@@ -44,6 +44,7 @@
                     <tr>
                         <th>Ime</th>
                         <th>Email</th>
+                        <th>Datoteka</th>
                         <th>Akcije</th>
                     </tr>
                     </thead>
@@ -52,6 +53,7 @@
                         <tr data-crud-id="{{ $professor->id }}">
                             <td data-crud-ref="name">{{ $professor->name }}</td>
                             <td data-crud-ref="email">{{ $professor->email }}</td>
+                            <td>{{ count($professor->files) }}</td>
                             <td data-crud-actions>
                                 <button class="crud-modify crud-button"><i class="glyphicon glyphicon-pencil"></i></button>
                                 <button class="crud-delete crud-button"><i class="glyphicon glyphicon-remove"></i></button>

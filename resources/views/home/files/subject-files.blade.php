@@ -11,7 +11,7 @@
 --><section id="csf__files">
     <ul id="csf__files__list">
         @foreach($allPS as $ps)
-            <li class="csf__subject__content" data-id="{{ $ps->subject->id }}">
+            <li class="csf__subject__content{!! $ps->subject->id == $allPS->first()->subject->id ? ' csf__subject__shown z2' : '' !!}" data-id="{{ $ps->subject->id }}">
                 <table class="table">
                     <thead>
                     <tr>

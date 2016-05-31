@@ -79,17 +79,19 @@ $crudCourses .= '}';
                         <th>Smjer</th>
                         <th>Predmeta</th>
                         <th>Učenika</th>
+                        <th>Datoteka</th>
                         <th>Akcije</th>
                     </tr>
                     </thead>
                     <tbody id="classes-body">
                     @foreach($classes as $class)
                         <tr data-crud-id="{{ $class->id }}">
-                            <td data-crud-ref="label" data-crud-value="{{ $class->label }}">{{ $class->name }}</td>
+                            <td data-crud-ref="label" data-crud-value="{{ $class->label }}"><a class="default__link" href="{{ route('single-class', ['id' => $class->id]) }}">{{ $class->name }}</a></td>
                             <td data-crud-ref="year" data-crud-value="{{ $class->year }}">{{ $class->year }}. / {{ $class->year + 1 }}.</td>
                             <td data-crud-ref="course" data-crud-value="{{ $class->course->id }}">{{ $class->course->name }}</td>
-                            <td><a href="{{ route('single-class', ['id' => $class->id]) }}">{{ count($class->ps) }}</a></td>
+                            <td>{{ count($class->ps) }}</td>
                             <td>{{ count($class->students) }}</td>
+                            <td>{{ count($class->files) }}</td>
                             <td data-crud-actions>
                                 <button class="crud-modify crud-button"><i class="glyphicon glyphicon-pencil"></i></button>
                                 <button class="crud-delete crud-button"><i class="glyphicon glyphicon-remove"></i></button>

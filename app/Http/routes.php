@@ -35,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('classes', 'ClassController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::get('/classes/{id}', ['uses' => 'ClassController@single', 'as' => 'single-class']);
         Route::post('/classes/{id}/ps', 'ClassController@storePS');
+        Route::put('/classes/{id}/ps/{psid}', 'ClassController@updatePS');
         Route::delete('/classes/{id}/ps/{psid}', 'ClassController@destroyPS');
         Route::resource('professors', 'ProfessorsController', ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::resource('subjects', 'SubjectController', ['only' => ['index', 'store', 'update', 'destroy']]);

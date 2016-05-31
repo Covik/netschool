@@ -89,12 +89,20 @@ $(document).ready(function() {
      --Start--
      */
 
-    var csfSubjectActive = 'csf__subject--active';
+    var csfSubjectActive = 'csf__subject--active',
+        csfSubjectShown = 'csf__subject__shown';
     $(document).on('click', '.csf__subject:not(.'+ csfSubjectActive +')', function (e) {
         var i = $(this).index();
         $('.' + csfSubjectActive).removeClass(csfSubjectActive);
         $(this).addClass(csfSubjectActive);
-        $('#csf__files__list').find('> li').hide().eq(i).show();
+
+        var $content = $('#csf__files__list'),
+            $last = $content.find('.' + csfSubjectShown);
+
+        $content.find('> li').removeClass('z2').eq(i).addClass('csf__subject__shown z2').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+            $last.removeClass(csfSubjectShown);
+        });
+        
         currentSubject = $(this).attr('data-id');
     });
 
@@ -118,6 +126,22 @@ $(document).ready(function() {
     });
 
     /* Class list tabs
+     --End--
+     */
+
+    /* Single class tabs
+     --Start--
+     */
+
+    var scClassActive = 'class__tab__item--active';
+    $(document).on('click', '#class__tab__items > li:not(.'+ csfClassActive +')', function (e) {
+        var i = $(this).index();
+        $('.' + scClassActive).removeClass(scClassActive);
+        $(this).addClass(scClassActive);
+        $('#class__tabs').find('.class__tab__content').hide().eq(i).show();
+    });
+
+    /* Single class tabs
      --End--
      */
 });

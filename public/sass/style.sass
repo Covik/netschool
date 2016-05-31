@@ -1,5 +1,6 @@
 @import "compass/css3"
 @import "compass/reset"
+@import "compass/css3/selection"
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,700italic,400italic&subset=latin,latin-ext")
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic&subset=latin,latin-ext")
@@ -21,6 +22,9 @@ body
 
 body, html
   height: 100%
+
+*
+  +selection(lighten($primary-color, 15%), #fff)
 
 input, button, textarea, select, option
   background-color: rgba(#000, 0.2)
@@ -177,6 +181,11 @@ button
   a:hover
     color: darken($primary-color, 5%)
 
+  a.default__link
+    &:link, &:visited
+      color: inherit
+      border-bottom: 1px dotted rgba(#DDD, 0.7)
+
   th
     background-color: rgba(#000, 0.2)
     font-size: 1.2em
@@ -310,6 +319,7 @@ button
   padding: 1.5em
   border-bottom: 1px solid rgba(#000, 0.1)
   cursor: pointer
+  position: relative
   transition: all 0.5s
   +roboto300
 
@@ -320,10 +330,19 @@ button
     background-color: rgba(#000, 0.1)
 
 .csf__subject__name
+  display: inline-block
   font-size: 1.2em
+  padding: 0.1em
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  width: calc(100% - 0.5em)
 
 .csf__subject__count
-  float: right
+  position: absolute
+  right: 1em
+  top: 50%
+  transform: translateY(-50%)
 
   > div
     display: inline-block
@@ -336,9 +355,28 @@ button
 
 #csf__files
   width: 70%
+  position: relative
+  background-color: lighten($primary-color, 3%)
 
-#csf__files__list > li:not(:first-child)
-  display: none
+#csf__files__list > li
+  background-color: lighten($primary-color, 3%)
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  opacity: 0
+  transform: translateX(-100%)
+  transition: transform 0.5s, opacity 0.3s, background-color 0.5s
+
+  &.csf__subject__shown
+    transform: translateX(0)
+    opacity: 1
+    z-index: 1
+
+    &.z2
+      z-index: 2 !important
+      background-color: $primary-color
 
 .csf__file__author__professor
   font-style: italic
@@ -480,6 +518,51 @@ a.csf__file__download
 
       &:not(:first-child)
         display: none
+
+
+/* Admin classes tabs */
+#class__tab__items
+  position: absolute
+  left: 0.5em
+  bottom: -0.5em
+  +md-shadow(3)
+  transform: scaleY(0)
+  transition: transform 0.5s, opacity 0.5s
+  opacity: 0
+  z-index: 1
+  transform-origin: top
+
+#class__tab__items > li
+  display: inline-block
+  padding: 0.5em
+  background-color: rgb(21, 143, 183)
+  font-size: 0.75em
+  +roboto300
+  cursor: pointer
+  text-transform: uppercase
+  transition: all 0.5s
+
+  &:hover
+    color: #BBB
+
+.class__tab__item--active
+  background-color: #01769C !important
+  color: inherit !important
+
+#class__name__hover
+  cursor: pointer
+
+  > i
+    font-size: 10px
+    vertical-align: 0.4em
+    margin-left: 0.8em
+
+#class__name__hover:hover > #class__tab__items
+  transform: scaleY(1)
+  opacity: 1
+
+.class__tab__content:not(:first-child)
+  display: none
 
 
 @media only screen and (min-width: 1600px)

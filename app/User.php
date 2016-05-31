@@ -47,6 +47,10 @@ class User extends Authenticatable
         return $classes;
     }
 
+    public function files() {
+        return $this->hasMany('App\File');
+    }
+
 
     public function scopeAdmins($query) {
         return $query->where('role', '=', config('roles.admin'));

@@ -75,6 +75,15 @@ body, html {
   height: 100%;
 }
 
+*::-moz-selection {
+  color: #fff;
+  background-color: #3bceff;
+}
+*::selection {
+  color: #fff;
+  background-color: #3bceff;
+}
+
 input, button, textarea, select, option {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 0.4em 0.6em;
@@ -245,6 +254,10 @@ button {
 .table a:hover {
   color: #009fd4;
 }
+.table a.default__link:link, .table a.default__link:visited {
+  color: inherit;
+  border-bottom: 1px dotted rgba(221, 221, 221, 0.7);
+}
 .table th {
   background-color: rgba(0, 0, 0, 0.2);
   font-size: 1.2em;
@@ -390,6 +403,7 @@ button {
   padding: 1.5em;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  position: relative;
   transition: all 0.5s;
   font-family: Roboto, sans-serif;
   font-weight: 300;
@@ -402,11 +416,20 @@ button {
 }
 
 .csf__subject__name {
+  display: inline-block;
   font-size: 1.2em;
+  padding: 0.1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: calc(100% - 0.5em);
 }
 
 .csf__subject__count {
-  float: right;
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .csf__subject__count > div {
   display: inline-block;
@@ -420,10 +443,29 @@ button {
 
 #csf__files {
   width: 70%;
+  position: relative;
+  background-color: #00bdfc;
 }
 
-#csf__files__list > li:not(:first-child) {
-  display: none;
+#csf__files__list > li {
+  background-color: #00bdfc;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.5s, opacity 0.3s, background-color 0.5s;
+}
+#csf__files__list > li.csf__subject__shown {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 1;
+}
+#csf__files__list > li.csf__subject__shown.z2 {
+  z-index: 2 !important;
+  background-color: #00b2ed;
 }
 
 .csf__file__author__professor {
@@ -577,6 +619,57 @@ a.csf__file__download:link, a.csf__file__download:visited {
   height: 100%;
 }
 #csf__classes__content > ul > li:not(:first-child) {
+  display: none;
+}
+
+/* Admin classes tabs */
+#class__tab__items {
+  position: absolute;
+  left: 0.5em;
+  bottom: -0.5em;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  transform: scaleY(0);
+  transition: transform 0.5s, opacity 0.5s;
+  opacity: 0;
+  z-index: 1;
+  transform-origin: top;
+}
+
+#class__tab__items > li {
+  display: inline-block;
+  padding: 0.5em;
+  background-color: #158fb7;
+  font-size: 0.75em;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.5s;
+}
+#class__tab__items > li:hover {
+  color: #BBB;
+}
+
+.class__tab__item--active {
+  background-color: #01769C !important;
+  color: inherit !important;
+}
+
+#class__name__hover {
+  cursor: pointer;
+}
+#class__name__hover > i {
+  font-size: 10px;
+  vertical-align: 0.4em;
+  margin-left: 0.8em;
+}
+
+#class__name__hover:hover > #class__tab__items {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.class__tab__content:not(:first-child) {
   display: none;
 }
 

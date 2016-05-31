@@ -184,8 +184,70 @@ class ClassController extends Controller
             ]);
         }
     }
+
+    public function updatePS(Request $request, $id, $psid) {
+        $class = TheClass::find($id);
+
+        $validator = Validator::make(['nastavnik' => $request->input('professor'), 'predmet' => $psid], [
+            'predmet' => 'required|integer|exists:professor_subjects,id',
+            'nastavnik' => 'required|integer|exists:users,id,role,'.config('roles.professor')
+        ]);
+
+        if($validator->fails()) {
+            $errors = [];
+
+            if($validator->errors()->get('predmet')) $errors[] = 'Dogodila se neočekivana greška';
+            else $errors = $validator->errors()->all();
+
+            return response()->json([
+                'success' => false,
+                'output' => $errors
+            ]);
+        }
+
+        try {
+            $psOld = ProfessorSubject::find($psid);
+
+            $subject = $psOld->subject->id;
+            $professor = $request->input('professor');
+
+            $ps = ProfessorSubject::firstOrCreate([
+                'professor_id' => $professor,
+                'subject_id' => $subject
+            ]);
+
+            $class->ps()->detach($psOld->id);
+            $class->ps()->attach($ps->id);
+
+            $prof = User::find($professor);
+
+            return response()->json([
+                'success' => true,
+                'output' => ['Uspješno ste uredili nastavnika za ovaj predmet!'],
+                'fields' => [
+                    'professor' => $prof->name
+                ]
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'output' => ['Dogodila se neočekivana greška!']
+            ]);
+        }
+    }
     
     public function destroyPS($id, $psid) {
+        $validator = Validator::make(['ps' => $psid], [
+            'ps' => 'required|integer|exists:professor_subjects,id'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'output' => ['Dogodila se neočekivana greška!']
+            ]);
+        }
+
         try {
             $class = TheClass::find($id);
 

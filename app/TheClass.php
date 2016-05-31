@@ -26,6 +26,10 @@ class TheClass extends Model
         return $this->belongsToMany('App\ProfessorSubject', 'professor_class_subject', 'class_id', 'ps_id');
     }
 
+    public function files() {
+        return $this->hasMany('App\File', 'class_id');
+    }
+
     public function getNameAttribute() {
         return $this->getClassNumber().'.'.$this->label;
     }
@@ -37,9 +41,5 @@ class TheClass extends Model
         if($year > $this->course->duration) $year = $this->course->duration;
 
         return $year;
-    }
-
-    public function files() {
-        return $this->hasMany('App\File', 'class_id');
     }
 }

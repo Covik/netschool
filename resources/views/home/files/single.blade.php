@@ -4,6 +4,7 @@
     @if(isset($myfiles))
         @if($au->isAdmin() || $au->isProfessor())<td>{{ $file->theClass->name }}</td>@endif
         <td>{{ $file->subject->name }}</td>
+    @elseif(isset($showSubject)) <td>{{ $file->subject->name }}</td>
     @endif
     @if(!isset($myfiles) || $au->isAdmin())<td{!! $file->user->isProfessor() ? ' class="csf__file__author__professor"' : '' !!}>{{ $file->user->name }}</td>@endif
     <td>{{ $file->created_at->format('d.m.Y. H:i') }}</td>

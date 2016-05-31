@@ -16,6 +16,7 @@
                         <th>Ime</th>
                         <th>Email</th>
                         <th>Razred</th>
+                        <th>Datoteka</th>
                         <th>Akcije</th>
                     </tr>
                     </thead>
@@ -25,6 +26,7 @@
                             <td data-crud-ref="name">{{ $student->name }}</td>
                             <td data-crud-ref="email">{{ $student->email }}</td>
                             <td data-crud-ref="class">{{ $student->theClass !== null ? $student->theClass->name : '' }}</td>
+                            <td>{{ count($student->files) }}</td>
                             <td data-crud-actions>
                                 <button class="crud-modify crud-button"><i class="glyphicon glyphicon-pencil"></i></button>
                                 <button class="crud-delete crud-button"><i class="glyphicon glyphicon-remove"></i></button>
